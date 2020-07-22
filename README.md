@@ -3,7 +3,8 @@ Export data tables to excel with colors schemes and additional custom formatting
 
 Youtube video: 
 
-Follow the below instructions to use export_excel.py
+Follow the below instructions in Spotfire to use export_excel.py
+***Note this only works in client Spotfire unless you have the appropriate imports setup in Spotfire Web Server***
 
 1. Import data
 2. Add data table visual and color as desired
