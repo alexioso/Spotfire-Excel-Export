@@ -42,6 +42,9 @@ with open(tmp,'wb') as outfile:
     writer = csv.writer(outfile, delimiter=',')
     writer.writerows(row for row in reader)
 
+
+
+
 #setup Excel session
 ex = Excel.ApplicationClass()   
 #make it visible (open)
@@ -61,8 +64,14 @@ for k in ["a","b","c"]:
     sh = workbook.Sheets.Add()
     sh.Name = k
 
+#here is how you can remove a sheet
+#workbook.Sheets["Sheet1"].Delete()
+
+
 #after workbook level you can access sheet level
+
 output = workbook.Sheets["iris"]
+
 
 #after choosing sheet, all there is left to choose from is Range
 #Various ways to do this including .Columns, .Rows, .Range
@@ -95,7 +104,7 @@ output.Range("A1:B1").Interior.Color =  rgbForExcel(244, 176, 132)
 output.Range("C1:D1").Interior.Color =  rgbForExcel(248, 203, 173)
 output.Range("E1").Interior.Color =  rgbForExcel(252, 228, 214)
 output.Range("A3:C20").Interior.Color =  rgbForExcel(244, 15, 224)
-output.Range("D20:E30").Interior.Color =  rgbForExcel(255, 230, 153)
+output.Range("D20:E30").Font.Color =  rgbForExcel(255, 230, 153)
 
 #details at
 #https://docs.microsoft.com/en-us/office/vba/api/excel.xllinestyle
@@ -104,18 +113,25 @@ output.Range("C3:E3").Borders.LineStyle = Excel.XlLineStyle.xlDashDot
 
 output.Range("A2:A12").Font.Size = 10
 output.Range("B2:B12").Font.Size = 14
-    
-#workbook.SaveAs(str(datetime.today()).split(" ")[0].replace("-",""))
-            
-#adjust the zoom of window (different from sheet)
-workbook.Windows(1).Zoom = 120
 
+output.Range("A3").Font.Bold = True
+output.Range("A3").Font.Italic = True
 
 
 output.Range("F2").Value2 = "Hungry"
 output.Range("F2").Value2 = "Angry"
 output.Range("F2").Value2 = "Happy"
 output.Range("F2").Value2 = "OK"
+
+ 
+workbook.SaveAs(str(datetime.today()).split(" ")[0].replace("-",""))
+            
+#adjust the zoom of window (different from sheet)
+workbook.Windows(1).Zoom = 120
+
+
+
+
 
 
 #workbook.Windows(1).FreezePanes = False
@@ -125,6 +141,4 @@ output.Range("F2").Value2 = "OK"
 
 
 
-
-        
 
