@@ -3,7 +3,10 @@ from Spotfire.Dxp.Application.Visuals import CrossTablePlot, TablePlot
 from  Spotfire.Dxp.Data.Export import DataWriterTypeIdentifiers
 import tempfile
 import os
+#Common Language Runtime - manages execution of .NET programs
 import clr
+#Interop allows program to communicate with other MS office products,
+# like Excel
 clr.AddReferenceByName('Microsoft.Office.Interop.Excel, Version=11.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c')
 from Microsoft.Office.Interop import Excel
 import csv
@@ -53,6 +56,7 @@ ex.DisplayAlerts = False
 #IMPORTANT: everything starts with the workbook object
 workbook = ex.Workbooks.Open(tmp)
 
+
 #if you want to start workbook from scratch, use this line instead:
 #workbook = ex.Workbooks.Add()
 
@@ -83,6 +87,8 @@ output.Range("B2").HorizontalAlignment = Excel.XlHAlign.xlHAlignRight
 output.Range("C1:C20").HorizontalAlignment = Excel.XlHAlign.xlHAlignLeft
 output.Rows("3").HorizontalAlignment = Excel.XlHAlign.xlHAlignDistributed
 output.Columns("E").HorizontalAlignment = Excel.XlHAlign.xlHAlignFill
+
+
 
 
 
@@ -119,13 +125,16 @@ output.Range("A3").Font.Italic = True
 
 
 output.Range("F2").Value2 = "Hungry"
-output.Range("F2").Value2 = "Angry"
-output.Range("F2").Value2 = "Happy"
-output.Range("F2").Value2 = "OK"
+output.Range("F3").Value2 = "Angry"
+output.Range("F4").Value2 = "Happy"
+output.Range("F5").Value2 = "OK"
 
- 
+
 workbook.SaveAs(str(datetime.today()).split(" ")[0].replace("-",""))
-            
+
+
+workbook.Sheets["iris"].Activate()
+        
 #adjust the zoom of window (different from sheet)
 workbook.Windows(1).Zoom = 120
 
@@ -134,11 +143,10 @@ workbook.Windows(1).Zoom = 120
 
 
 
-#workbook.Windows(1).FreezePanes = False
-#workbook.Windows(1).SplitColumn = 4
-#workbook.Windows(1).SplitRow = 2
-#workbook.Windows(1).FreezePanes = True
-
+workbook.Windows(1).FreezePanes = False
+workbook.Windows(1).SplitColumn = 4
+workbook.Windows(1).SplitRow = 2
+workbook.Windows(1).FreezePanes = True
 
 
 
