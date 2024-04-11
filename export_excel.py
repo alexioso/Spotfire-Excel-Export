@@ -205,11 +205,14 @@ ff = open(tmp, 'r').readlines()
 #count rows and cols in table since that's not stored anywhere
 row_count = 0
 #with open(tmp,"wb") as file_:
+lastCols = []
 for line in ff:
-    lastCol = len(line.split("\t"))
+    lastCols.append(len(line.split("\t"))_
     #line = line.replace(",","|")
     #file_.write(line.replace("\t",","))
     row_count += 1
+
+lastCol = max(lastCols)
 
 reader = list(csv.reader(open(tmp, "r"), delimiter='\t'))
 with open(tmp,'wb') as outfile:
